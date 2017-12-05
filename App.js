@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Dimensions, Text, View, Button, TouchableOpacity } from 'react-native';
 
 import { Constants, Svg } from 'expo';
 
 import {
   DrawerNavigator,
 } from 'react-navigation';
+
+var {height, width} = Dimensions.get('window');
 
 class MyHomeScreen extends React.Component {
   static navigationOptions = {
@@ -15,10 +17,12 @@ class MyHomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button
+        <TouchableOpacity          
           onPress={() => this.props.navigation.navigate('Notifications')}
-          title="Go to notifications"
-        />
+        >
+          <Text style={styles.buttomCustom}>{'Go to notifications'.toUpperCase()}</Text> 
+          <Text>{width} x {height}</Text>
+        </TouchableOpacity>
         <Text>You are on the home screen</Text>
       </View>  
     );
@@ -43,6 +47,24 @@ class MyNotificationsScreen extends React.Component {
   }
 }
 
+class InfoScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Info',
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Button
+          onPress={() => this.props.navigation.goBack()}
+          title="Go back home"
+        />
+        <Text>You are on the info screen</Text>
+      </View>
+    );
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -52,15 +74,47 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
+  buttonBottom: {
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: 'red',
+  },
+  buttomCustom: {
+    padding: 8,
+    textAlign: 'center',
+    fontWeight: '700',
+    color: '#fff',
+    backgroundColor: 'green',
+  },
+  red: {
+    color: 'red',
+  }
 });
 
-let App = DrawerNavigator({
+const App = DrawerNavigator({
   Home: {
     screen: MyHomeScreen,
   },
   Notifications: {
     screen: MyNotificationsScreen,
   },
+  Info: {
+    screen: InfoScreen,
+  },
+},{
+  contentOptions: {
+    activeTintColor: '#fff',
+    itemsContainerStyle: {
+      flex: 1,
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      backgroundColor: 'rgb(90,200,250)',
+      height,
+    },    
+    iconContainerStyle: {
+      opacity: 1
+    }
+  }
 });
 
 
