@@ -107,9 +107,10 @@ const App = DrawerNavigator({
     itemsContainerStyle: {
       flex: 1,
       flexDirection: 'column',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
       backgroundColor: 'rgb(90,200,250)',
-      height,
+      height: height * .66,
+      marginVertical: height * .16,
     },    
     iconContainerStyle: {
       opacity: 1
