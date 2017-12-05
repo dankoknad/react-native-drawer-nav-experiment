@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Dimensions, Text, View, Button, TouchableOpacity } from 'react-native';
+import { Dimensions } from 'react-native';
 
 import { Constants, Svg } from 'expo';
 
@@ -7,96 +7,18 @@ import {
   DrawerNavigator,
 } from 'react-navigation';
 
-var {height, width} = Dimensions.get('window');
+import NotificationsScreen from './pages/NotificationsScreen'
+import HomeScreen from './pages/HomeScreen'
+import InfoScreen from './pages/InfoScreen'
 
-class MyHomeScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Home',
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <TouchableOpacity          
-          onPress={() => this.props.navigation.navigate('Notifications')}
-        >
-          <Text style={styles.buttomCustom}>{'Go to notifications'.toUpperCase()}</Text> 
-          <Text>{width} x {height}</Text>
-        </TouchableOpacity>
-        <Text>You are on the home screen</Text>
-      </View>  
-    );
-  }
-}
-
-class MyNotificationsScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Notifications',
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-        />
-        <Text>You are on the notifications screen</Text>
-      </View>
-    );
-  }
-}
-
-class InfoScreen extends React.Component {
-  static navigationOptions = {
-    drawerLabel: 'Info',
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Button
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-        />
-        <Text>You are on the info screen</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center'
-  },
-  icon: {
-    width: 24,
-    height: 24,
-  },
-  buttonBottom: {
-    position: 'absolute',
-    bottom: 0,
-    backgroundColor: 'red',
-  },
-  buttomCustom: {
-    padding: 8,
-    textAlign: 'center',
-    fontWeight: '700',
-    color: '#fff',
-    backgroundColor: 'green',
-  },
-  red: {
-    color: 'red',
-  }
-});
+var { height, width } = Dimensions.get('window');
 
 const App = DrawerNavigator({
   Home: {
-    screen: MyHomeScreen,
+    screen: HomeScreen,
   },
   Notifications: {
-    screen: MyNotificationsScreen,
+    screen: NotificationsScreen,
   },
   Info: {
     screen: InfoScreen,
@@ -117,6 +39,5 @@ const App = DrawerNavigator({
     }
   }
 });
-
 
 export default App
